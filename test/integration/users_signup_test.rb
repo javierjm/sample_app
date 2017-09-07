@@ -26,8 +26,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
 
     assert_template 'users/new'
-
-    assert_template layout: "layouts/application", partial: "_error_messages"
+    #assert_template partial: "shared/_user_error_messages"
+    assert_template layout: "layouts/application", partial: "shared/_error_messages"
   end
 
   test "valid signup information" do
