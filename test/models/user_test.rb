@@ -3,9 +3,8 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup 
-  	#@user = User.new(name: "Javier Jara", email: "javier.jara@logn.co", 
-  	#	                     password: "foobar", password_confirmation: "foobar") 
-    @user = users(:javier)
+  	@user = User.new(name: "Javier Jara", email: "javier.jara@logn.cor", 
+  		                     password: "foobar", password_confirmation: "foobar") 
   end
 
   test "should be valid" do 
@@ -36,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
   	valid_address = %w{user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn}
   	valid_address.each do |valid_address| 
   		@user.email = valid_address
-  		assert @user.valid?, "#{valid_address.inspect} should be valid"
+  		assert @user.valid?, "#{valid_address.inspect} for user: #{@user.name}: should be valid"
   	end
   end
 
@@ -45,11 +44,13 @@ class UserTest < ActiveSupport::TestCase
                            foo@bar_baz.com foo@bar+baz.com]
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
-      assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
+
+      assert_not @user.valid?, "#{invalid_address.inspect} for #{@user.name} : should be invalid"
     end
   end
 
   test "email must be unique" do 
+    @user.email = "javier.jara@logn.co"
   	duplicate_user = @user.dup 
   	duplicate_user.email = @user.email.upcase
   	@user.save 
@@ -57,10 +58,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email addresses should be saved as lower-case" do 
-  	@user.email = "javier.JARA@logn.co"
+    @user.email = "user@example.COM"
   	@user.save 
   	copy = @user.reload 
-  	assert_equal("javier.jara@logn.co", copy.email, "FUCK email is not downcase")
+  	assert_equal("user@example.com", copy.email, "FUCK email is not downcase")
   end
 
   test "password should be present (nonblank)" do
