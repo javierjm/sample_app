@@ -7,17 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+#    add_column :users, :activation_digest, :string
+#   add_column :users, :activated, :boolean, default: false
+#  add_column :users, :activated_at, :datetime
+
 User.create!(name:  "Javier Jara",
              email: "javierjaram@gmail.com",
              password:              "123456",
              password_confirmation: "123456",
-             admin: true)
+             admin: true, 
+             activated: true,
+             activated_at: Time.zone.now )
 
 User.create!(name:  "Laura Vargas",
              email: "laurits8@gmail.com",
              password:              "123456",
              password_confirmation: "123456",
-             admin: true)
+             admin: true, 
+             activated: true,
+             activated_at: Time.zone.now)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -27,6 +35,8 @@ User.create!(name:  "Laura Vargas",
   User.create!(name:  name,
                email: email,
                password:              password,
-               password_confirmation: password)
+               password_confirmation: password, 
+               activated: true,
+               activated_at: Time.zone.now)
 end
 
