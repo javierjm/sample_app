@@ -54,6 +54,10 @@
     return reset_sent_at < 2.hours.ago
   end
 
+  def feed 
+    microposts.where("user_id = ?", id)
+  end
+
   # Previous specific to remember_token authenticated? method 
   #def authenticated?(remember_token)
   #  return false if remember_digest.nil?

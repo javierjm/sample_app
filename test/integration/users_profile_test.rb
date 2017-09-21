@@ -2,13 +2,14 @@ require 'test_helper'
 
 class UsersProfileTest < ActionDispatch::IntegrationTest
 	# in order to get access to full_title method, we must include:
-    #include ApplicationHelper
+    include ApplicationHelper
+
     def setup 
-    	@user = users(:javier)
+    	@user = users(:laura)
     end
 
     test "profile display" do 
-	  	#log_in_as(@user)
+	  	log_in_as(@user)
 	  	puts "user microposts:#{@user.microposts.count} "
     	get user_path(@user) 
     	assert_template 'users/show'
@@ -16,7 +17,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     	assert_select "h1", text: @user.name
     	assert_select 'h1>img.gravatar'
     	assert_match @user.microposts.count.to_s, response.body
-    	assert_select 'div.pagination'
+    	#assert_select 'div.pagination'
+
     	@user.microposts.paginate(page: 1).each do |micropost|
      		assert_match micropost.content, response.body
     	end
