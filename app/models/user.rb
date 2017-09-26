@@ -1,6 +1,6 @@
   class User < ApplicationRecord  
   has_many :microposts, dependent: :destroy
-  has_many :active_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   #Rails would see “followeds” and use the singular “followed”, assembling a collection using the followed_id in the relationships table. 
   #But, as noted in Section 14.1.1, user.followeds is rather awkward, so we’ll write user.following instead. 
   #Naturally, Rails allows us to override the default, in this case using the source parameter

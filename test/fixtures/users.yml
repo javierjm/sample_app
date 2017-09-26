@@ -4,22 +4,23 @@ javier:
   name: Javier Jara M
   email: javierjaram@gmail.com
   password_digest: <%= User.digest('123456') %>
-  id: 1
+  #id: 1
   admin: true 
   activated: true
   activated_at: <%= Time.zone.now %>
 
 laura:
-  name: Laura Vargas
+  name: Laura Vargas V
   email: laurits8@gmai.com
   password_digest: <%= User.digest('123456') %>
-  id: 2
+  #id: 2
   activated: true
   activated_at: <%= Time.zone.now %>
 
 lana:
   name: Lana Kane
   email: hands@example.gov
+ # id: 3
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -27,6 +28,7 @@ lana:
 malory:
   name: Malory Archer
   email: boss@example.gov
+ # id: 4
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
